@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script src="https://raw.githubusercontent.com/abhi1509/MapTest/master/datamaps.world.min.js?v=1"></script>
+
+
+<div id="container1" style="max-height: 450px; position: relative; width: 50%;"></div>
+
+<script>
+    //basic map config with custom fills, mercator projection
+    var map = new Datamap({
+        scope: 'world',
+        element: document.getElementById('container1'),
+        projection: 'mercator',
+        height: 450,
+        fills: {
+            defaultFill: '#FFA500',
+            lt50: 'rgba(0,244,244,0.9)',
+            gt50: 'red',
+            darkgreen: '#23A023'
+        },
+        //geographyConfig: {
+        //    highlightOnHover: false,
+        //    popupOnHover: false
+        //},
+
+        //data: {
+        //    USA: { fillKey: 'other', numberOfThings: 10381 },
+        //RUS: { fillKey: 'lt50' },
+        //CAN: { fillKey: 'lt50' },
+        //BRA: { fillKey: 'gt50' },
+        //ARG: { fillKey: 'gt50' },
+        //COL: { fillKey: 'gt50' },
+        //AUS: { fillKey: 'gt50' },
+        //ZAF: { fillKey: 'gt50' },
+        //MAD: { fillKey: 'gt50' },
+        //}
+    }); //bubbles, custom popup on hover template
+    map.bubbles([
+        {
+            name: 'Chilly',
+            latitude: -25.32,
+            longitude: 120.32,
+            radius: 5,
+            fillKey: 'darkgreen',
+            animate: true,
+            borderWidth: 0,
+            fillOpacity: 1
+        },
+        {
+            name: 'Hot',
+            latitude: 21.32,
+            longitude: 5.32,
+            radius: 5,
+            fillKey: 'darkgreen',
+            borderWidth: 0,
+            fillOpacity: 1
+        },
+        {
+            name: 'Hot again',
+            latitude: 21.32,
+            longitude: -84.32,
+            radius: 5,
+            fillKey: 'darkgreen',
+            animate: true,
+            borderWidth: 0,
+            fillOpacity: 1
+        }
+    ], {
+        popupTemplate: function(geo, data) {
+            return "<div class='hoverinfo'>It is " + data.name + "</div>";
+        }
+    });
+    //draw a legend for this map
+    //map.legend();
+
+</script>
+</body>
